@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a **Node.js 20 job template repository** that provides boilerplate and examples for creating JavaScript/TypeScript jobs that run on the SGNL Job Service. This repository serves as a starting point for developers who want to create new JavaScript jobs that can be executed by the job service infrastructure.
+This is a **Node.js 20 job template repository** that provides boilerplate and examples for creating JavaScript/TypeScript jobs that run on SGNL's CAEP Hub. This repository serves as a starting point for developers who want to create new JavaScript jobs that can be executed by the CAEP Hub infrastructure.
 
 ## Repository Structure
 
@@ -23,7 +23,7 @@ sgnl-job-template/
 This template repository is specifically for the **nodejs-20** job type:
 
 - **Runtime**: Node.js 20 with modern JavaScript/TypeScript support
-- **Purpose**: JavaScript/TypeScript job execution in the SGNL Job Service
+- **Purpose**: JavaScript/TypeScript job execution in the SGNL CAEP Hub
 - **Container**: Optimized distroless Node.js 20 runtime environment
 
 ## Template Usage
@@ -34,7 +34,7 @@ This template repository is specifically for the **nodejs-20** job type:
 2. **Copy the template** to your working directory
 3. **Customize the job specification** in the JSON file
 4. **Implement your JavaScript logic** in the main script file
-5. **Test locally** using the job service development environment
+5. **Test locally** using the CAEP Hub development environment
 
 ### Job Specification Format
 
@@ -78,7 +78,7 @@ JavaScript jobs are defined using this JSON specification format:
 ### Required Labels for Logging
 
 For proper log aggregation, ensure your jobs emit structured logs with these labels:
-- `service="job-service"`
+- `service="caep-hub"`
 - `job_id="<job-id>"`
 - `tenant_id="<tenant-id>"`
 
@@ -94,7 +94,7 @@ JavaScript jobs have access to these environment variables:
 
 ### Local Testing
 
-1. Set up the job service development environment
+1. Set up the CAEP Hub development environment
 2. Submit your JavaScript job using the dispatcher API
 3. Monitor execution through the registry
 4. Check logs via Loki (if enabled)
@@ -110,12 +110,12 @@ JavaScript jobs have access to these environment variables:
 
 ## Related Repositories
 
-- **job_service** - Main job execution infrastructure
+- **CAEP Hub** - Main job execution infrastructure
 - **sgnl-job-hello-world** - Simple "hello world" job example
 
 ## Important Notes
 
-- This is a Node.js 20 template repository - breaking changes are expected as the job service evolves
+- This is a Node.js 20 template repository - breaking changes are expected as the CAEP Hub evolves
 - Always test JavaScript jobs in a development environment before production use
 - Follow SGNL security guidelines for handling sensitive data in JavaScript
 - JavaScript jobs should be idempotent when possible
@@ -124,6 +124,6 @@ JavaScript jobs have access to these environment variables:
 ## Getting Help
 
 - Check the `examples/` directory for working JavaScript implementations
-- Review the job service documentation for nodejs-20 job type details
-- Use the job service integration tests as reference implementations
+- Review the CAEP Hub documentation for nodejs-20 job type details
+- Use the CAEP Hub integration tests as reference implementations
 - Leverage Node.js 20 documentation for language features

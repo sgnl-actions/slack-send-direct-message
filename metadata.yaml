@@ -1,37 +1,36 @@
-name: job-template
-description: Template for SGNL JavaScript jobs - replace with your job description
+name: slack-send-direct-message
+description: Send a direct message to a Slack user by email
 
 # Input parameters for web form generation
 inputs:
-  target:
+  userEmail:
     type: text
-    description: Target resource identifier (e.g., user email, group ID)
+    description: Email address of the Slack user to send the message to
+    required: true
+    validation:
+      min: 5
+      max: 254
+      pattern: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
+
+  text:
+    type: text
+    description: The text message to send to the user
     required: true
     validation:
       min: 1
-      max: 100
+      max: 4000
 
-  action:
-    type: text
-    description: Action to perform on the target resource
+# Secrets required for operation
+secrets:
+  SLACK_ACCESS_TOKEN:
+    description: Slack Bot User OAuth Token with users:read.email and chat:write scopes
     required: true
-    validation:
-      min: 1
-      max: 50
 
-  options:
-    type: array
-    description: Additional options for the operation
-    required: false
-    item_type: text
-    validation:
-      max: 10
-
-  dry_run:
-    type: boolean
-    description: Preview changes without executing them
-    required: false
-    default: false
+# Environment variables
+environment:
+  SLACK_API_URL:
+    description: Base URL for Slack API
+    default: "https://slack.com"
 
 # Expected output structure
 outputs:
@@ -39,10 +38,22 @@ outputs:
     type: text
     description: Operation result (success, failed, recovered, etc.)
 
-  target:
+  userEmail:
     type: text
-    description: The target resource that was processed
+    description: The email address of the user the message was sent to
 
-  processed_at:
-    type: datetime
-    description: When the operation completed (ISO 8601)
+  userId:
+    type: text
+    description: The Slack user ID that was resolved from the email
+
+  text:
+    type: text
+    description: The message text that was sent
+
+  ts:
+    type: text
+    description: The timestamp of the sent message from Slack API
+
+  ok:
+    type: boolean
+    description: Whether the Slack API call was successful

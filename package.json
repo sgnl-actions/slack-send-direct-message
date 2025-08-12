@@ -1,7 +1,7 @@
 {
-  "name": "@sgnl/job-template",
+  "name": "@sgnl-actions/slack-send-direct-message",
   "version": "1.0.0",
-  "description": "Template for SGNL JavaScript jobs",
+  "description": "Send a direct message to a Slack user by email",
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
@@ -15,7 +15,7 @@
     "validate": "node scripts/validate-metadata.js",
     "dev": "node scripts/dev-runner.js"
   },
-  "keywords": ["sgnl", "job", "template", "identity", "security"],
+  "keywords": ["sgnl", "slack", "direct-message", "messaging", "identity", "security"],
   "author": "SGNL Engineering",
   "license": "MIT",
   "dependencies": {
