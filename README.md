@@ -26,7 +26,7 @@ Add the Slack token as a secret in your SGNL environment:
 
 ```json
 {
-  "SLACK_ACCESS_TOKEN": "xoxb-your-slack-bot-token"
+  "BEARER_AUTH_TOKEN": "xoxb-your-slack-bot-token"
 }
 ```
 
@@ -49,7 +49,7 @@ Add the Slack token as a secret in your SGNL environment:
 
 | Secret | Required | Description |
 |--------|----------|-------------|
-| `SLACK_ACCESS_TOKEN` | Yes | Slack Bot User OAuth Token with required scopes |
+| `BEARER_AUTH_TOKEN` | Yes | Slack Bot User OAuth Token with required scopes |
 
 ### Outputs
 
@@ -161,7 +161,7 @@ These errors will not be retried:
 |-------|-------|----------|
 | `User not found with email: user@example.com` | Email not in workspace | Verify email belongs to workspace member |
 | `Slack API error: missing_scope` | Insufficient OAuth scopes | Add `users:read.email` and `chat:write` scopes |
-| `SLACK_ACCESS_TOKEN secret is required` | Missing token | Configure the secret in SGNL |
+| `BEARER_AUTH_TOKEN secret is required` | Missing token | Configure the secret in SGNL |
 
 ## Security Considerations
 

@@ -19,7 +19,7 @@ describe('Slack Send Direct Message Script', () => {
       SLACK_API_URL: 'https://slack.com'
     },
     secrets: {
-      SLACK_ACCESS_TOKEN: 'xoxb-test-token-123456'
+      BEARER_AUTH_TOKEN: 'xoxb-test-token-123456'
     }
   };
 
@@ -182,7 +182,7 @@ describe('Slack Send Direct Message Script', () => {
       expect(result.text).toBe('Message with "quotes" and \'single quotes\'');
     });
 
-    test('should throw error when SLACK_ACCESS_TOKEN is missing', async () => {
+    test('should throw error when BEARER_AUTH_TOKEN is missing', async () => {
       const params = {
         userEmail: 'test@example.com',
         text: 'Test message'
@@ -194,7 +194,7 @@ describe('Slack Send Direct Message Script', () => {
       };
 
       await expect(script.invoke(params, contextWithoutToken)).rejects.toThrow(
-        'SLACK_ACCESS_TOKEN secret is required'
+        'BEARER_AUTH_TOKEN secret is required'
       );
     });
 

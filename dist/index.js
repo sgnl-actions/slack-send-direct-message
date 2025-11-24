@@ -72,10 +72,10 @@ var script = {
 
     const { userEmail, text } = params;
     const baseUrl = context.environment?.SLACK_API_URL || 'https://slack.com';
-    const token = context.secrets?.SLACK_ACCESS_TOKEN;
+    const token = context.secrets?.BEARER_AUTH_TOKEN;
 
     if (!token) {
-      throw new Error('SLACK_ACCESS_TOKEN secret is required');
+      throw new Error('BEARER_AUTH_TOKEN secret is required');
     }
 
     // Step 1: Look up user by email
