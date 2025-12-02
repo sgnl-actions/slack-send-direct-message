@@ -37,13 +37,13 @@ inputs:
 
 # Secrets required for operation
 secrets:
-  SLACK_ACCESS_TOKEN:
+  BEARER_AUTH_TOKEN:
     description: Slack Bot User OAuth Token with users:read.email and chat:write scopes
     required: true
 
 # Environment variables
 environment:
-  SLACK_API_URL:
+  ADDRESS:
     description: Base URL for Slack API
     default: "https://slack.com"
 

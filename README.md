@@ -45,7 +45,7 @@ Add the Slack token as a secret in your SGNL environment:
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `SLACK_API_URL` | `https://slack.com` | Base URL for Slack API |
+| `ADDRESS` | `https://slack.com` | Base URL for Slack API |
 
 ### Secrets
 
