@@ -36,8 +36,10 @@ Add the Slack token as a secret in your SGNL environment:
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `userEmail` | string | Yes | Email address of the Slack user to send the message to |
 | `text` | string | Yes | The text message to send (max 4000 characters) |
+| `userEmail` | string | Yes | Email address of the Slack user to send the message to |
+| `delay` | Duration | No | Delay between API calls (e.g., 100ms, 1s). Default: 100ms |
+| `address` | string | No | Slack API base URL (e.g., https://slack.com) |
 
 ### Environment Variables
 
@@ -68,8 +70,19 @@ Add the Slack token as a secret in your SGNL environment:
 
 ```json
 {
+  "text": "Hello John! This is an automated message from SGNL.",
+  "userEmail": "john.doe@company.com"
+}
+```
+
+### With Delay and Custom Address
+
+```json
+{
+  "text": "Your request has been approved!",
   "userEmail": "john.doe@company.com",
-  "text": "Hello John! This is an automated message from SGNL."
+  "delay": "200ms",
+  "address": "https://slack.com"
 }
 ```
 
@@ -77,8 +90,8 @@ Add the Slack token as a secret in your SGNL environment:
 
 ```json
 {
-  "userEmail": "user+test@example.com",
-  "text": "Your request has been \"approved\" and you're all set!"
+  "text": "Your request has been \"approved\" and you're all set!",
+  "userEmail": "user+test@example.com"
 }
 ```
 

@@ -3,6 +3,14 @@ description: Send a direct message to a Slack user by email
 
 # Input parameters for web form generation
 inputs:
+  text:
+    type: text
+    description: The text message to send to the user
+    required: true
+    validation:
+      min: 1
+      max: 4000
+
   userEmail:
     type: text
     description: Email address of the Slack user to send the message to
@@ -12,13 +20,20 @@ inputs:
       max: 254
       pattern: "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$"
 
-  text:
+  delay:
     type: text
-    description: The text message to send to the user
-    required: true
+    description: Delay between API calls (e.g., 100ms, 1s). Default 100ms
+    required: false
+    validation:
+      max: 50
+
+  address:
+    type: text
+    description: Slack API base URL (e.g., https://slack.com)
+    required: false
     validation:
       min: 1
-      max: 4000
+      max: 255
 
 # Secrets required for operation
 secrets:
