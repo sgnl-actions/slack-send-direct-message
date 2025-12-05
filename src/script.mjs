@@ -5,21 +5,49 @@
  * and then sending a message to their DM channel.
  */
 
+import { getBaseUrl, getAuthorizationHeader } from '@sgnl-actions/utils';
+
+function parseDuration(durationStr) {
+  if (!durationStr) return 100; // default 100ms
+
+  const match = durationStr.match(/^(\d+(?:\.\d+)?)(ms|s|m|h)?$/i);
+  if (!match) {
+    console.warn(`Invalid duration format: ${durationStr}, using default 100ms`);
+    return 100;
+  }
+
+  const value = parseFloat(match[1]);
+  const unit = (match[2] || 'ms').toLowerCase();
+
+  switch (unit) {
+    case 'ms':
+      return value;
+    case 's':
+      return value * 1000;
+    case 'm':
+      return value * 60 * 1000;
+    case 'h':
+      return value * 60 * 60 * 1000;
+    default:
+      return value;
+  }
+}
+
 /**
  * Look up a Slack user by email address
  * @param {string} email - The email address to look up
  * @param {string} baseUrl - The Slack API base URL
- * @param {string} token - The Slack access token
+ * @param {string} authHeader - The Authorization header value
  * @returns {Promise<Response>} The fetch response
  */
-async function lookupUserByEmail(email, baseUrl, token) {
+async function lookupUserByEmail(email, baseUrl, authHeader) {
   const encodedEmail = encodeURIComponent(email);
   const url = new URL(`/api/users.lookupByEmail?email=${encodedEmail}`, baseUrl);
 
   const response = await fetch(url.toString(), {
     method: 'GET',
     headers: {
-      'Authorization': `Bearer ${token}`,
+      'Authorization': authHeader,
       'Accept': 'application/json'
     }
   });
@@ -32,16 +60,16 @@ async function lookupUserByEmail(email, baseUrl, token) {
  * @param {string} userId - The Slack user ID
  * @param {string} text - The message text
  * @param {string} baseUrl - The Slack API base URL
- * @param {string} token - The Slack access token
+ * @param {string} authHeader - The Authorization header value
  * @returns {Promise<Response>} The fetch response
  */
-async function sendDirectMessage(userId, text, baseUrl, token) {
+async function sendDirectMessage(userId, text, baseUrl, authHeader) {
   const url = new URL('/api/chat.postMessage', baseUrl);
 
   const response = await fetch(url.toString(), {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${token}`,
+      'Authorization': authHeader,
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
@@ -58,26 +86,34 @@ export default {
   /**
    * Main execution handler - sends a direct message to a Slack user by email
    * @param {Object} params - Job input parameters
-   * @param {string} params.userEmail - Email address of the Slack user
-   * @param {string} params.text - The message text to send
-   * @param {Object} context - Execution context with env, secrets, outputs
-   * @returns {Object} Job results
+   * @param {string} params.text - The message text to send (required)
+   * @param {string} params.userEmail - Email address of the Slack user (required)
+   * @param {string} params.delay - Optional delay between API calls (e.g., 100ms, 1s)
+   * @param {string} params.address - Optional Slack API base URL
+   * @param {Object} context - Execution context with secrets and environment
+   * @param {string} context.environment.ADDRESS - Default Slack API base URL
+   *
+   * The configured auth type will determine which of the following environment variables and secrets are available
+   * @param {string} context.secrets.BEARER_AUTH_TOKEN
+   *
+   * @param {string} context.secrets.OAUTH2_AUTHORIZATION_CODE_ACCESS_TOKEN
+   *
+   * @returns {Promise<Object>} Action result
    */
   invoke: async (params, context) => {
     console.log('Starting Slack direct message send');
     console.log(`Sending message to: ${params.userEmail}`);
 
-    const { userEmail, text } = params;
-    const baseUrl = context.environment?.SLACK_API_URL || 'https://slack.com';
-    const token = context.secrets?.SLACK_ACCESS_TOKEN;
+    const { userEmail, text, delay } = params;
+    const baseUrl = getBaseUrl(params, context);
+    const authHeader = await getAuthorizationHeader(context);
 
-    if (!token) {
-      throw new Error('SLACK_ACCESS_TOKEN secret is required');
-    }
+    // Parse delay duration
+    const delayMs = parseDuration(delay);
 
     // Step 1: Look up user by email
     console.log(`Looking up user by email: ${userEmail}`);
-    const lookupResponse = await lookupUserByEmail(userEmail, baseUrl, token);
+    const lookupResponse = await lookupUserByEmail(userEmail, baseUrl, authHeader);
 
     if (!lookupResponse.ok) {
       const errorData = await lookupResponse.json().catch(() => ({}));
@@ -99,9 +135,13 @@ export default {
 
     console.log(`Found user ID: ${userId}`);
 
+    // Add delay between API calls to avoid rate limiting
+    console.log(`Waiting ${delayMs}ms before sending message`);
+    await new Promise(resolve => setTimeout(resolve, delayMs));
+
     // Step 2: Send direct message
     console.log(`Sending direct message to user: ${userId}`);
-    const messageResponse = await sendDirectMessage(userId, text, baseUrl, token);
+    const messageResponse = await sendDirectMessage(userId, text, baseUrl, authHeader);
 
     if (!messageResponse.ok) {
       throw new Error(`Failed to send message: ${messageResponse.status} ${messageResponse.statusText}`);
@@ -125,41 +165,9 @@ export default {
     };
   },
 
-  /**
-   * Error recovery handler - implements retry logic for transient failures
-   * @param {Object} params - Original params plus error information
-   * @param {Object} context - Execution context
-   * @returns {Object} Recovery results
-   */
   error: async (params, _context) => {
     const { error } = params;
-    console.error(`Slack send message error: ${error.message}`);
-
-    // Retryable errors: rate limits and server errors
-    if (error.message.includes('429') || error.message.includes('502') ||
-        error.message.includes('503') || error.message.includes('504')) {
-      console.log('Retryable error detected, waiting before retry');
-
-      // Wait for rate limit reset (basic implementation)
-      if (error.message.includes('429')) {
-        await new Promise(resolve => setTimeout(resolve, 5000));
-      } else {
-        await new Promise(resolve => setTimeout(resolve, 1000));
-      }
-
-      // Let framework retry
-      return { status: 'retry_requested' };
-    }
-
-    // Fatal errors: authentication, user not found, etc.
-    if (error.message.includes('401') || error.message.includes('403') ||
-        error.message.includes('User not found')) {
-      console.error('Fatal error - not retrying');
-      throw error;
-    }
-
-    // Default: allow framework to retry
-    return { status: 'retry_requested' };
+    throw error;
   },
 
   /**

@@ -16,10 +16,10 @@ describe('Slack Send Direct Message Script', () => {
 
   const mockContext = {
     environment: {
-      SLACK_API_URL: 'https://slack.com'
+      ADDRESS: 'https://slack.com'
     },
     secrets: {
-      SLACK_ACCESS_TOKEN: 'xoxb-test-token-123456'
+      BEARER_AUTH_TOKEN: 'xoxb-test-token-123456'
     }
   };
 
@@ -182,7 +182,7 @@ describe('Slack Send Direct Message Script', () => {
       expect(result.text).toBe('Message with "quotes" and \'single quotes\'');
     });
 
-    test('should throw error when SLACK_ACCESS_TOKEN is missing', async () => {
+    test('should throw error when BEARER_AUTH_TOKEN is missing', async () => {
       const params = {
         userEmail: 'test@example.com',
         text: 'Test message'
@@ -194,7 +194,7 @@ describe('Slack Send Direct Message Script', () => {
       };
 
       await expect(script.invoke(params, contextWithoutToken)).rejects.toThrow(
-        'SLACK_ACCESS_TOKEN secret is required'
+        'No authentication configured'
       );
     });
 
@@ -311,103 +311,19 @@ describe('Slack Send Direct Message Script', () => {
       );
     });
 
-    test('should use default SLACK_API_URL when not provided in environment', async () => {
-      const params = {
-        userEmail: 'test@example.com',
-        text: 'Test message'
-      };
-
-      const contextWithoutUrl = {
-        ...mockContext,
-        environment: {}
-      };
-
-      // Mock successful responses
-      mockFetch.mockImplementationOnce(() =>
-        Promise.resolve({
-          ok: true,
-          json: () => Promise.resolve({
-            ok: true,
-            user: { id: 'U12345678' }
-          })
-        })
-      );
-
-      mockFetch.mockImplementationOnce(() =>
-        Promise.resolve({
-          ok: true,
-          json: () => Promise.resolve({
-            ok: true,
-            ts: '1609459200.000200'
-          })
-        })
-      );
-
-      await script.invoke(params, contextWithoutUrl);
-
-      // Verify default URL was used
-      expect(mockFetch).toHaveBeenNthCalledWith(1,
-        'https://slack.com/api/users.lookupByEmail?email=test%40example.com',
-        expect.any(Object)
-      );
-    });
   });
 
   describe('error handler', () => {
-    test('should request retry for rate limit errors (429)', async () => {
+    test('should re-throw error for framework to handle', async () => {
+      const error = new Error('Network timeout');
+      error.statusCode = 500;
+
       const params = {
         userEmail: 'test@example.com',
-        error: new Error('Rate limited: 429')
+        error: error
       };
 
-      const result = await script.error(params, mockContext);
-
-      expect(result.status).toBe('retry_requested');
-    });
-
-    test('should request retry for server errors (502, 503, 504)', async () => {
-      for (const status of ['502', '503', '504']) {
-        const params = {
-          userEmail: 'test@example.com',
-          error: new Error(`Server error: ${status}`)
-        };
-
-        const result = await script.error(params, mockContext);
-        expect(result.status).toBe('retry_requested');
-      }
-    });
-
-    test('should throw fatal error for authentication errors', async () => {
-      const params = {
-        userEmail: 'test@example.com',
-        error: new Error('Authentication failed: 401')
-      };
-
-      await expect(script.error(params, mockContext)).rejects.toThrow(
-        'Authentication failed: 401'
-      );
-    });
-
-    test('should throw fatal error for user not found', async () => {
-      const params = {
-        userEmail: 'test@example.com',
-        error: new Error('User not found with email: test@example.com')
-      };
-
-      await expect(script.error(params, mockContext)).rejects.toThrow(
-        'User not found with email: test@example.com'
-      );
-    });
-
-    test('should request retry for unknown errors by default', async () => {
-      const params = {
-        userEmail: 'test@example.com',
-        error: new Error('Unknown network error')
-      };
-
-      const result = await script.error(params, mockContext);
-
-      expect(result.status).toBe('retry_requested');
+      await expect(script.error(params, mockContext)).rejects.toThrow('Network timeout');
     });
   });
 

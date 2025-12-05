@@ -26,7 +26,7 @@ Add the Slack token as a secret in your SGNL environment:
 
 ```json
 {
-  "SLACK_ACCESS_TOKEN": "xoxb-your-slack-bot-token"
+  "BEARER_AUTH_TOKEN": "xoxb-your-slack-bot-token"
 }
 ```
 
@@ -36,20 +36,22 @@ Add the Slack token as a secret in your SGNL environment:
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `userEmail` | string | Yes | Email address of the Slack user to send the message to |
 | `text` | string | Yes | The text message to send (max 4000 characters) |
+| `userEmail` | string | Yes | Email address of the Slack user to send the message to |
+| `delay` | Duration | No | Delay between API calls (e.g., 100ms, 1s). Default: 100ms |
+| `address` | string | No | Slack API base URL (e.g., https://slack.com) |
 
 ### Environment Variables
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `SLACK_API_URL` | `https://slack.com` | Base URL for Slack API |
+| `ADDRESS` | `https://slack.com` | Base URL for Slack API |
 
 ### Secrets
 
 | Secret | Required | Description |
 |--------|----------|-------------|
-| `SLACK_ACCESS_TOKEN` | Yes | Slack Bot User OAuth Token with required scopes |
+| `BEARER_AUTH_TOKEN` | Yes | Slack Bot User OAuth Token with required scopes |
 
 ### Outputs
 
@@ -68,8 +70,19 @@ Add the Slack token as a secret in your SGNL environment:
 
 ```json
 {
+  "text": "Hello John! This is an automated message from SGNL.",
+  "userEmail": "john.doe@company.com"
+}
+```
+
+### With Delay and Custom Address
+
+```json
+{
+  "text": "Your request has been approved!",
   "userEmail": "john.doe@company.com",
-  "text": "Hello John! This is an automated message from SGNL."
+  "delay": "200ms",
+  "address": "https://slack.com"
 }
 ```
 
@@ -77,8 +90,8 @@ Add the Slack token as a secret in your SGNL environment:
 
 ```json
 {
-  "userEmail": "user+test@example.com",
-  "text": "Your request has been \"approved\" and you're all set!"
+  "text": "Your request has been \"approved\" and you're all set!",
+  "userEmail": "user+test@example.com"
 }
 ```
 
@@ -161,7 +174,7 @@ These errors will not be retried:
 |-------|-------|----------|
 | `User not found with email: user@example.com` | Email not in workspace | Verify email belongs to workspace member |
 | `Slack API error: missing_scope` | Insufficient OAuth scopes | Add `users:read.email` and `chat:write` scopes |
-| `SLACK_ACCESS_TOKEN secret is required` | Missing token | Configure the secret in SGNL |
+| `BEARER_AUTH_TOKEN secret is required` | Missing token | Configure the secret in SGNL |
 
 ## Security Considerations
 
