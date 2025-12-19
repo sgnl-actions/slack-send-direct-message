@@ -480,9 +480,9 @@ function parseDuration(durationStr) {
  */
 async function lookupUserByEmail(email, baseUrl, authHeader) {
   const encodedEmail = encodeURIComponent(email);
-  const url = new URL(`/api/users.lookupByEmail?email=${encodedEmail}`, baseUrl);
+  const url = `${baseUrl}/api/users.lookupByEmail?email=${encodedEmail}`;
 
-  const response = await fetch(url.toString(), {
+  const response = await fetch(url, {
     method: 'GET',
     headers: {
       'Authorization': authHeader,
@@ -502,9 +502,9 @@ async function lookupUserByEmail(email, baseUrl, authHeader) {
  * @returns {Promise<Response>} The fetch response
  */
 async function sendDirectMessage(userId, text, baseUrl, authHeader) {
-  const url = new URL('/api/chat.postMessage', baseUrl);
+  const url = `${baseUrl}/api/chat.postMessage`;
 
-  const response = await fetch(url.toString(), {
+  const response = await fetch(url, {
     method: 'POST',
     headers: {
       'Authorization': authHeader,
