@@ -5,7 +5,7 @@
  * and then sending a message to their DM channel.
  */
 
-import { getBaseURL, getAuthorizationHeader, resolveJSONPathTemplates} from '@sgnl-actions/utils';
+import { getBaseURL, getAuthorizationHeader} from '@sgnl-actions/utils';
 
 function parseDuration(durationStr) {
   if (!durationStr) return 100; // default 100ms
@@ -102,18 +102,11 @@ export default {
    */
   invoke: async (params, context) => {
     console.log('Starting Slack direct message send');
-    const jobContext = context.data || {};
 
-    // Resolve JSONPath templates in params
-    const { result: resolvedParams, errors } = resolveJSONPathTemplates(params, jobContext);
-    if (errors.length > 0) {
-     console.warn('Template resolution errors:', errors);
-    }
+    console.log(`Sending message to: ${params.userEmail}`);
 
-    console.log(`Sending message to: ${resolvedParams.userEmail}`);
-
-    const { userEmail, text, delay } = resolvedParams;
-    const baseUrl = getBaseURL(resolvedParams, context);
+    const { userEmail, text, delay } = params;
+    const baseUrl = getBaseURL(params, context);
     const authHeader = await getAuthorizationHeader(context);
 
     // Parse delay duration
