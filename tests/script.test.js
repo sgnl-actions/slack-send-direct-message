@@ -1,5 +1,6 @@
 import { jest } from '@jest/globals';
 import script from '../src/script.mjs';
+import { SGNL_USER_AGENT } from '@sgnl-actions/utils';
 
 describe('Slack Send Direct Message Script', () => {
   // fetch is already mocked globally in setup.js
@@ -79,7 +80,9 @@ describe('Slack Send Direct Message Script', () => {
           method: 'GET',
           headers: {
             'Authorization': 'Bearer xoxb-test-token-123456',
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'User-Agent': SGNL_USER_AGENT
           }
         }
       );
@@ -92,7 +95,8 @@ describe('Slack Send Direct Message Script', () => {
           headers: {
             'Authorization': 'Bearer xoxb-test-token-123456',
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'User-Agent': SGNL_USER_AGENT
           },
           body: JSON.stringify({
             channel: 'U12345678',
