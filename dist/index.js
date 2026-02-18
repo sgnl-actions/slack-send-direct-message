@@ -9,6 +9,11 @@
  */
 
 /**
+ * User-Agent header value for all SGNL CAEP Hub requests.
+ */
+const SGNL_USER_AGENT = 'SGNL-CAEP-Hub/2.0';
+
+/**
  * Get OAuth2 access token using client credentials flow
  * @param {Object} config - OAuth2 configuration
  * @param {string} config.tokenUrl - Token endpoint URL
@@ -39,7 +44,8 @@ async function getClientCredentialsToken(config) {
 
   const headers = {
     'Content-Type': 'application/x-www-form-urlencoded',
-    'Accept': 'application/json'
+    'Accept': 'application/json',
+    'User-Agent': SGNL_USER_AGENT
   };
 
   if (authStyle === 'InParams') {
@@ -158,6 +164,21 @@ function getBaseURL(params, context) {
 }
 
 /**
+ * Create full headers object with Authorization and common headers
+ * @param {Object} context - Execution context with env and secrets
+ * @returns {Promise<Object>} Headers object with Authorization, Accept, Content-Type
+ */
+async function createAuthHeaders(context) {
+  const authHeader = await getAuthorizationHeader(context);
+  return {
+    'Authorization': authHeader,
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+    'User-Agent': SGNL_USER_AGENT
+  };
+}
+
+/**
  * Slack Send Direct Message Action
  *
  * Sends a direct message to a Slack user by looking up their user ID from email
@@ -195,19 +216,16 @@ function parseDuration(durationStr) {
  * Look up a Slack user by email address
  * @param {string} email - The email address to look up
  * @param {string} baseUrl - The Slack API base URL
- * @param {string} authHeader - The Authorization header value
+ * @param {Object} headers - The headers object containing authorization and other headers
  * @returns {Promise<Response>} The fetch response
  */
-async function lookupUserByEmail(email, baseUrl, authHeader) {
+async function lookupUserByEmail(email, baseUrl, headers) {
   const encodedEmail = encodeURIComponent(email);
   const url = `${baseUrl}/api/users.lookupByEmail?email=${encodedEmail}`;
 
   const response = await fetch(url, {
     method: 'GET',
-    headers: {
-      'Authorization': authHeader,
-      'Accept': 'application/json'
-    }
+    headers
   });
 
   return response;
@@ -218,19 +236,15 @@ async function lookupUserByEmail(email, baseUrl, authHeader) {
  * @param {string} userId - The Slack user ID
  * @param {string} text - The message text
  * @param {string} baseUrl - The Slack API base URL
- * @param {string} authHeader - The Authorization header value
+ * @param {Object} headers - The headers object containing authorization and other headers
  * @returns {Promise<Response>} The fetch response
  */
-async function sendDirectMessage(userId, text, baseUrl, authHeader) {
+async function sendDirectMessage(userId, text, baseUrl, headers) {
   const url = `${baseUrl}/api/chat.postMessage`;
 
   const response = await fetch(url, {
     method: 'POST',
-    headers: {
-      'Authorization': authHeader,
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
+    headers,
     body: JSON.stringify({
       channel: userId,
       text: text
@@ -265,14 +279,14 @@ var script = {
 
     const { userEmail, text, delay } = params;
     const baseUrl = getBaseURL(params, context);
-    const authHeader = await getAuthorizationHeader(context);
+    const headers = await createAuthHeaders(context);
 
     // Parse delay duration
     const delayMs = parseDuration(delay);
 
     // Step 1: Look up user by email
     console.log(`Looking up user by email: ${userEmail}`);
-    const lookupResponse = await lookupUserByEmail(userEmail, baseUrl, authHeader);
+    const lookupResponse = await lookupUserByEmail(userEmail, baseUrl, headers);
 
     if (!lookupResponse.ok) {
       const errorData = await lookupResponse.json().catch(() => ({}));
@@ -300,7 +314,7 @@ var script = {
 
     // Step 2: Send direct message
     console.log(`Sending direct message to user: ${userId}`);
-    const messageResponse = await sendDirectMessage(userId, text, baseUrl, authHeader);
+    const messageResponse = await sendDirectMessage(userId, text, baseUrl, headers);
 
     if (!messageResponse.ok) {
       throw new Error(`Failed to send message: ${messageResponse.status} ${messageResponse.statusText}`);

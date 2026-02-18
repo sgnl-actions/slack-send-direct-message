@@ -5,7 +5,7 @@
  * and then sending a message to their DM channel.
  */
 
-import { getBaseURL, getAuthorizationHeader} from '@sgnl-actions/utils';
+import { getBaseURL, createAuthHeaders} from '@sgnl-actions/utils';
 
 function parseDuration(durationStr) {
   if (!durationStr) return 100; // default 100ms
@@ -37,19 +37,16 @@ function parseDuration(durationStr) {
  * Look up a Slack user by email address
  * @param {string} email - The email address to look up
  * @param {string} baseUrl - The Slack API base URL
- * @param {string} authHeader - The Authorization header value
+ * @param {Object} headers - The headers object containing authorization and other headers
  * @returns {Promise<Response>} The fetch response
  */
-async function lookupUserByEmail(email, baseUrl, authHeader) {
+async function lookupUserByEmail(email, baseUrl, headers) {
   const encodedEmail = encodeURIComponent(email);
   const url = `${baseUrl}/api/users.lookupByEmail?email=${encodedEmail}`;
 
   const response = await fetch(url, {
     method: 'GET',
-    headers: {
-      'Authorization': authHeader,
-      'Accept': 'application/json'
-    }
+    headers
   });
 
   return response;
@@ -60,19 +57,15 @@ async function lookupUserByEmail(email, baseUrl, authHeader) {
  * @param {string} userId - The Slack user ID
  * @param {string} text - The message text
  * @param {string} baseUrl - The Slack API base URL
- * @param {string} authHeader - The Authorization header value
+ * @param {Object} headers - The headers object containing authorization and other headers
  * @returns {Promise<Response>} The fetch response
  */
-async function sendDirectMessage(userId, text, baseUrl, authHeader) {
+async function sendDirectMessage(userId, text, baseUrl, headers) {
   const url = `${baseUrl}/api/chat.postMessage`;
 
   const response = await fetch(url, {
     method: 'POST',
-    headers: {
-      'Authorization': authHeader,
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    },
+    headers,
     body: JSON.stringify({
       channel: userId,
       text: text
@@ -107,14 +100,14 @@ export default {
 
     const { userEmail, text, delay } = params;
     const baseUrl = getBaseURL(params, context);
-    const authHeader = await getAuthorizationHeader(context);
+    const headers = await createAuthHeaders(context);
 
     // Parse delay duration
     const delayMs = parseDuration(delay);
 
     // Step 1: Look up user by email
     console.log(`Looking up user by email: ${userEmail}`);
-    const lookupResponse = await lookupUserByEmail(userEmail, baseUrl, authHeader);
+    const lookupResponse = await lookupUserByEmail(userEmail, baseUrl, headers);
 
     if (!lookupResponse.ok) {
       const errorData = await lookupResponse.json().catch(() => ({}));
@@ -142,7 +135,7 @@ export default {
 
     // Step 2: Send direct message
     console.log(`Sending direct message to user: ${userId}`);
-    const messageResponse = await sendDirectMessage(userId, text, baseUrl, authHeader);
+    const messageResponse = await sendDirectMessage(userId, text, baseUrl, headers);
 
     if (!messageResponse.ok) {
       throw new Error(`Failed to send message: ${messageResponse.status} ${messageResponse.statusText}`);
