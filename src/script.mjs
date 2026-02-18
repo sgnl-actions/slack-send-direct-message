@@ -5,7 +5,7 @@
  * and then sending a message to their DM channel.
  */
 
-import { getBaseURL, createAuthHeaders} from '@sgnl-actions/utils';
+import { getBaseURL, createAuthHeaders } from '@sgnl-actions/utils';
 
 function parseDuration(durationStr) {
   if (!durationStr) return 100; // default 100ms
