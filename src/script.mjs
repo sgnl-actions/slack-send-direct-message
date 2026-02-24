@@ -5,7 +5,7 @@
  * and then sending a message to their DM channel.
  */
 
-import { getBaseURL, createAuthHeaders} from '@sgnl-actions/utils';
+import { getBaseURL, createAuthHeaders } from '@sgnl-actions/utils';
 
 function parseDuration(durationStr) {
   if (!durationStr) return 100; // default 100ms
@@ -20,16 +20,16 @@ function parseDuration(durationStr) {
   const unit = (match[2] || 'ms').toLowerCase();
 
   switch (unit) {
-    case 'ms':
-      return value;
-    case 's':
-      return value * 1000;
-    case 'm':
-      return value * 60 * 1000;
-    case 'h':
-      return value * 60 * 60 * 1000;
-    default:
-      return value;
+  case 'ms':
+    return value;
+  case 's':
+    return value * 1000;
+  case 'm':
+    return value * 60 * 1000;
+  case 'h':
+    return value * 60 * 60 * 1000;
+  default:
+    return value;
   }
 }
 
@@ -96,9 +96,18 @@ export default {
   invoke: async (params, context) => {
     console.log('Starting Slack direct message send');
 
-    console.log(`Sending message to: ${params.userEmail}`);
-
     const { userEmail, text, delay } = params;
+
+    if (!userEmail || typeof userEmail !== 'string' || !userEmail.trim()) {
+      throw new Error('userEmail parameter is required and cannot be empty');
+    }
+
+    if (!text || typeof text !== 'string' || !text.trim()) {
+      throw new Error('text parameter is required and cannot be empty');
+    }
+
+    console.log(`Sending message to: ${userEmail}`);
+
     const baseUrl = getBaseURL(params, context);
     const headers = await createAuthHeaders(context);
 

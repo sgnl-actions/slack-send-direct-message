@@ -1,0 +1,1018 @@
+{
+  "dm-user-lookup": {
+    "status": 200,
+    "ok": true,
+    "statusText": "OK",
+    "body": {
+      "ok": true,
+      "user": {
+        "id": "U0AHEHSJ59N",
+        "name": "dhanya",
+        "is_bot": false,
+        "updated": 1771861745,
+        "is_app_user": false,
+        "team_id": "T0AG4RT5B9V",
+        "deleted": false,
+        "color": "50a0cf",
+        "is_email_confirmed": true,
+        "real_name": "dhanya",
+        "tz": "America/Los_Angeles",
+        "tz_label": "Pacific Standard Time",
+        "tz_offset": -28800,
+        "is_admin": true,
+        "is_owner": true,
+        "is_primary_owner": true,
+        "is_restricted": false,
+        "is_ultra_restricted": false,
+        "who_can_share_contact_card": "EVERYONE",
+        "profile": {
+          "real_name": "dhanya",
+          "display_name": "",
+          "avatar_hash": "g1bedc954551",
+          "real_name_normalized": "dhanya",
+          "display_name_normalized": "",
+          "image_24": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=24&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-24.png",
+          "image_32": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=32&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-32.png",
+          "image_48": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=48&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-48.png",
+          "image_72": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-72.png",
+          "image_192": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=192&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-192.png",
+          "image_512": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=512&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-512.png",
+          "first_name": "dhanya",
+          "last_name": "",
+          "team": "T0AG4RT5B9V",
+          "email": "dhanya@sgnl.ai",
+          "title": "",
+          "phone": "",
+          "skype": "",
+          "status_text": "",
+          "status_text_canonical": "",
+          "status_emoji": "",
+          "status_emoji_display_info": [],
+          "status_expiration": 0
+        }
+      }
+    }
+  },
+  "dm-send-message": {
+    "status": 200,
+    "ok": true,
+    "statusText": "OK",
+    "body": {
+      "ok": true,
+      "channel": "D0AGPTT2BNY",
+      "ts": "1771895653.613059",
+      "message": {
+        "user": "U0AGZ7APZ17",
+        "type": "message",
+        "ts": "1771895653.613059",
+        "bot_id": "B0AG4S10CQP",
+        "app_id": "A0AHEJ4QT40",
+        "text": "Hello from record-replay DM test!",
+        "team": "T0AG4RT5B9V",
+        "bot_profile": {
+          "id": "B0AG4S10CQP",
+          "app_id": "A0AHEJ4QT40",
+          "user_id": "U0AGZ7APZ17",
+          "name": "dhanya-test-re-runnable",
+          "icons": {
+            "image_36": "https://a.slack-edge.com/80588/img/plugins/app/bot_36.png",
+            "image_48": "https://a.slack-edge.com/80588/img/plugins/app/bot_48.png",
+            "image_72": "https://a.slack-edge.com/80588/img/plugins/app/service_72.png"
+          },
+          "deleted": false,
+          "updated": 1771862092,
+          "team_id": "T0AG4RT5B9V"
+        },
+        "blocks": [
+          {
+            "type": "rich_text",
+            "block_id": "PNA",
+            "elements": [
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "Hello from record-replay DM test!"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "warning": "missing_charset",
+      "response_metadata": {
+        "warnings": [
+          "missing_charset"
+        ]
+      }
+    }
+  },
+  "dm-user-not-found": {
+    "status": 200,
+    "ok": true,
+    "statusText": "OK",
+    "body": {
+      "ok": false,
+      "error": "users_not_found"
+    }
+  },
+  "dm-lookup-api-error": {
+    "status": 200,
+    "ok": true,
+    "statusText": "OK",
+    "body": {
+      "ok": false,
+      "error": "missing_scope"
+    }
+  },
+  "dm-idempotency-lookup-1": {
+    "status": 200,
+    "ok": true,
+    "statusText": "OK",
+    "body": {
+      "ok": true,
+      "user": {
+        "id": "U0AHEHSJ59N",
+        "name": "dhanya",
+        "is_bot": false,
+        "updated": 1771861745,
+        "is_app_user": false,
+        "team_id": "T0AG4RT5B9V",
+        "deleted": false,
+        "color": "50a0cf",
+        "is_email_confirmed": true,
+        "real_name": "dhanya",
+        "tz": "America/Los_Angeles",
+        "tz_label": "Pacific Standard Time",
+        "tz_offset": -28800,
+        "is_admin": true,
+        "is_owner": true,
+        "is_primary_owner": true,
+        "is_restricted": false,
+        "is_ultra_restricted": false,
+        "who_can_share_contact_card": "EVERYONE",
+        "profile": {
+          "real_name": "dhanya",
+          "display_name": "",
+          "avatar_hash": "g1bedc954551",
+          "real_name_normalized": "dhanya",
+          "display_name_normalized": "",
+          "image_24": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=24&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-24.png",
+          "image_32": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=32&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-32.png",
+          "image_48": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=48&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-48.png",
+          "image_72": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-72.png",
+          "image_192": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=192&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-192.png",
+          "image_512": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=512&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-512.png",
+          "first_name": "dhanya",
+          "last_name": "",
+          "team": "T0AG4RT5B9V",
+          "email": "dhanya@sgnl.ai",
+          "title": "",
+          "phone": "",
+          "skype": "",
+          "status_text": "",
+          "status_text_canonical": "",
+          "status_emoji": "",
+          "status_emoji_display_info": [],
+          "status_expiration": 0
+        }
+      }
+    }
+  },
+  "dm-idempotency-send-1": {
+    "status": 200,
+    "ok": true,
+    "statusText": "OK",
+    "body": {
+      "ok": true,
+      "channel": "D0AGPTT2BNY",
+      "ts": "1771895654.166649",
+      "message": {
+        "user": "U0AGZ7APZ17",
+        "type": "message",
+        "ts": "1771895654.166649",
+        "bot_id": "B0AG4S10CQP",
+        "app_id": "A0AHEJ4QT40",
+        "text": "Idempotency test DM!",
+        "team": "T0AG4RT5B9V",
+        "bot_profile": {
+          "id": "B0AG4S10CQP",
+          "app_id": "A0AHEJ4QT40",
+          "user_id": "U0AGZ7APZ17",
+          "name": "dhanya-test-re-runnable",
+          "icons": {
+            "image_36": "https://a.slack-edge.com/80588/img/plugins/app/bot_36.png",
+            "image_48": "https://a.slack-edge.com/80588/img/plugins/app/bot_48.png",
+            "image_72": "https://a.slack-edge.com/80588/img/plugins/app/service_72.png"
+          },
+          "deleted": false,
+          "updated": 1771862092,
+          "team_id": "T0AG4RT5B9V"
+        },
+        "blocks": [
+          {
+            "type": "rich_text",
+            "block_id": "d/Sm",
+            "elements": [
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "Idempotency test DM!"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "warning": "missing_charset",
+      "response_metadata": {
+        "warnings": [
+          "missing_charset"
+        ]
+      }
+    }
+  },
+  "dm-idempotency-lookup-2": {
+    "status": 200,
+    "ok": true,
+    "statusText": "OK",
+    "body": {
+      "ok": true,
+      "user": {
+        "id": "U0AHEHSJ59N",
+        "name": "dhanya",
+        "is_bot": false,
+        "updated": 1771861745,
+        "is_app_user": false,
+        "team_id": "T0AG4RT5B9V",
+        "deleted": false,
+        "color": "50a0cf",
+        "is_email_confirmed": true,
+        "real_name": "dhanya",
+        "tz": "America/Los_Angeles",
+        "tz_label": "Pacific Standard Time",
+        "tz_offset": -28800,
+        "is_admin": true,
+        "is_owner": true,
+        "is_primary_owner": true,
+        "is_restricted": false,
+        "is_ultra_restricted": false,
+        "who_can_share_contact_card": "EVERYONE",
+        "profile": {
+          "real_name": "dhanya",
+          "display_name": "",
+          "avatar_hash": "g1bedc954551",
+          "real_name_normalized": "dhanya",
+          "display_name_normalized": "",
+          "image_24": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=24&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-24.png",
+          "image_32": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=32&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-32.png",
+          "image_48": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=48&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-48.png",
+          "image_72": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-72.png",
+          "image_192": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=192&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-192.png",
+          "image_512": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=512&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-512.png",
+          "first_name": "dhanya",
+          "last_name": "",
+          "team": "T0AG4RT5B9V",
+          "email": "dhanya@sgnl.ai",
+          "title": "",
+          "phone": "",
+          "skype": "",
+          "status_text": "",
+          "status_text_canonical": "",
+          "status_emoji": "",
+          "status_emoji_display_info": [],
+          "status_expiration": 0
+        }
+      }
+    }
+  },
+  "dm-idempotency-send-2": {
+    "status": 200,
+    "ok": true,
+    "statusText": "OK",
+    "body": {
+      "ok": true,
+      "channel": "D0AGPTT2BNY",
+      "ts": "1771895654.536639",
+      "message": {
+        "user": "U0AGZ7APZ17",
+        "type": "message",
+        "ts": "1771895654.536639",
+        "bot_id": "B0AG4S10CQP",
+        "app_id": "A0AHEJ4QT40",
+        "text": "Idempotency test DM!",
+        "team": "T0AG4RT5B9V",
+        "bot_profile": {
+          "id": "B0AG4S10CQP",
+          "app_id": "A0AHEJ4QT40",
+          "user_id": "U0AGZ7APZ17",
+          "name": "dhanya-test-re-runnable",
+          "icons": {
+            "image_36": "https://a.slack-edge.com/80588/img/plugins/app/bot_36.png",
+            "image_48": "https://a.slack-edge.com/80588/img/plugins/app/bot_48.png",
+            "image_72": "https://a.slack-edge.com/80588/img/plugins/app/service_72.png"
+          },
+          "deleted": false,
+          "updated": 1771862092,
+          "team_id": "T0AG4RT5B9V"
+        },
+        "blocks": [
+          {
+            "type": "rich_text",
+            "block_id": "2bEeE",
+            "elements": [
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "Idempotency test DM!"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "warning": "missing_charset",
+      "response_metadata": {
+        "warnings": [
+          "missing_charset"
+        ]
+      }
+    }
+  },
+  "dm-special-email-lookup": {
+    "status": 200,
+    "ok": true,
+    "statusText": "OK",
+    "body": {
+      "ok": true,
+      "user": {
+        "id": "U0AHEHSJ59N",
+        "name": "dhanya",
+        "is_bot": false,
+        "updated": 1771861745,
+        "is_app_user": false,
+        "team_id": "T0AG4RT5B9V",
+        "deleted": false,
+        "color": "50a0cf",
+        "is_email_confirmed": true,
+        "real_name": "dhanya",
+        "tz": "America/Los_Angeles",
+        "tz_label": "Pacific Standard Time",
+        "tz_offset": -28800,
+        "is_admin": true,
+        "is_owner": true,
+        "is_primary_owner": true,
+        "is_restricted": false,
+        "is_ultra_restricted": false,
+        "who_can_share_contact_card": "EVERYONE",
+        "profile": {
+          "real_name": "dhanya",
+          "display_name": "",
+          "avatar_hash": "g1bedc954551",
+          "real_name_normalized": "dhanya",
+          "display_name_normalized": "",
+          "image_24": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=24&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-24.png",
+          "image_32": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=32&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-32.png",
+          "image_48": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=48&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-48.png",
+          "image_72": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-72.png",
+          "image_192": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=192&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-192.png",
+          "image_512": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=512&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-512.png",
+          "first_name": "dhanya",
+          "last_name": "",
+          "team": "T0AG4RT5B9V",
+          "email": "dhanya@sgnl.ai",
+          "title": "",
+          "phone": "",
+          "skype": "",
+          "status_text": "",
+          "status_text_canonical": "",
+          "status_emoji": "",
+          "status_emoji_display_info": [],
+          "status_expiration": 0
+        }
+      }
+    }
+  },
+  "dm-special-email-send": {
+    "status": 200,
+    "ok": true,
+    "statusText": "OK",
+    "body": {
+      "ok": true,
+      "channel": "D0AGPTT2BNY",
+      "ts": "1771896649.617389",
+      "message": {
+        "user": "U0AGZ7APZ17",
+        "type": "message",
+        "ts": "1771896649.617389",
+        "bot_id": "B0AG4S10CQP",
+        "app_id": "A0AHEJ4QT40",
+        "text": "Testing special character email encoding",
+        "team": "T0AG4RT5B9V",
+        "bot_profile": {
+          "id": "B0AG4S10CQP",
+          "app_id": "A0AHEJ4QT40",
+          "user_id": "U0AGZ7APZ17",
+          "name": "dhanya-test-re-runnable",
+          "icons": {
+            "image_36": "https://a.slack-edge.com/80588/img/plugins/app/bot_36.png",
+            "image_48": "https://a.slack-edge.com/80588/img/plugins/app/bot_48.png",
+            "image_72": "https://a.slack-edge.com/80588/img/plugins/app/service_72.png"
+          },
+          "deleted": false,
+          "updated": 1771862092,
+          "team_id": "T0AG4RT5B9V"
+        },
+        "blocks": [
+          {
+            "type": "rich_text",
+            "block_id": "7U=",
+            "elements": [
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "Testing special character email encoding"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "warning": "missing_charset",
+      "response_metadata": {
+        "warnings": [
+          "missing_charset"
+        ]
+      }
+    }
+  },
+  "dm-delay-lookup": {
+    "status": 200,
+    "ok": true,
+    "statusText": "OK",
+    "body": {
+      "ok": true,
+      "user": {
+        "id": "U0AHEHSJ59N",
+        "name": "dhanya",
+        "is_bot": false,
+        "updated": 1771861745,
+        "is_app_user": false,
+        "team_id": "T0AG4RT5B9V",
+        "deleted": false,
+        "color": "50a0cf",
+        "is_email_confirmed": true,
+        "real_name": "dhanya",
+        "tz": "America/Los_Angeles",
+        "tz_label": "Pacific Standard Time",
+        "tz_offset": -28800,
+        "is_admin": true,
+        "is_owner": true,
+        "is_primary_owner": true,
+        "is_restricted": false,
+        "is_ultra_restricted": false,
+        "who_can_share_contact_card": "EVERYONE",
+        "profile": {
+          "real_name": "dhanya",
+          "display_name": "",
+          "avatar_hash": "g1bedc954551",
+          "real_name_normalized": "dhanya",
+          "display_name_normalized": "",
+          "image_24": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=24&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-24.png",
+          "image_32": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=32&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-32.png",
+          "image_48": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=48&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-48.png",
+          "image_72": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-72.png",
+          "image_192": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=192&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-192.png",
+          "image_512": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=512&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-512.png",
+          "first_name": "dhanya",
+          "last_name": "",
+          "team": "T0AG4RT5B9V",
+          "email": "dhanya@sgnl.ai",
+          "title": "",
+          "phone": "",
+          "skype": "",
+          "status_text": "",
+          "status_text_canonical": "",
+          "status_emoji": "",
+          "status_emoji_display_info": [],
+          "status_expiration": 0
+        }
+      }
+    }
+  },
+  "dm-delay-send": {
+    "status": 200,
+    "ok": true,
+    "statusText": "OK",
+    "body": {
+      "ok": true,
+      "channel": "D0AGPTT2BNY",
+      "ts": "1771896649.997479",
+      "message": {
+        "user": "U0AGZ7APZ17",
+        "type": "message",
+        "ts": "1771896649.997479",
+        "bot_id": "B0AG4S10CQP",
+        "app_id": "A0AHEJ4QT40",
+        "text": "Testing custom delay",
+        "team": "T0AG4RT5B9V",
+        "bot_profile": {
+          "id": "B0AG4S10CQP",
+          "app_id": "A0AHEJ4QT40",
+          "user_id": "U0AGZ7APZ17",
+          "name": "dhanya-test-re-runnable",
+          "icons": {
+            "image_36": "https://a.slack-edge.com/80588/img/plugins/app/bot_36.png",
+            "image_48": "https://a.slack-edge.com/80588/img/plugins/app/bot_48.png",
+            "image_72": "https://a.slack-edge.com/80588/img/plugins/app/service_72.png"
+          },
+          "deleted": false,
+          "updated": 1771862092,
+          "team_id": "T0AG4RT5B9V"
+        },
+        "blocks": [
+          {
+            "type": "rich_text",
+            "block_id": "m56M",
+            "elements": [
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "Testing custom delay"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "warning": "missing_charset",
+      "response_metadata": {
+        "warnings": [
+          "missing_charset"
+        ]
+      }
+    }
+  },
+  "dm-multiline-lookup": {
+    "status": 200,
+    "ok": true,
+    "statusText": "OK",
+    "body": {
+      "ok": true,
+      "user": {
+        "id": "U0AHEHSJ59N",
+        "name": "dhanya",
+        "is_bot": false,
+        "updated": 1771861745,
+        "is_app_user": false,
+        "team_id": "T0AG4RT5B9V",
+        "deleted": false,
+        "color": "50a0cf",
+        "is_email_confirmed": true,
+        "real_name": "dhanya",
+        "tz": "America/Los_Angeles",
+        "tz_label": "Pacific Standard Time",
+        "tz_offset": -28800,
+        "is_admin": true,
+        "is_owner": true,
+        "is_primary_owner": true,
+        "is_restricted": false,
+        "is_ultra_restricted": false,
+        "who_can_share_contact_card": "EVERYONE",
+        "profile": {
+          "real_name": "dhanya",
+          "display_name": "",
+          "avatar_hash": "g1bedc954551",
+          "real_name_normalized": "dhanya",
+          "display_name_normalized": "",
+          "image_24": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=24&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-24.png",
+          "image_32": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=32&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-32.png",
+          "image_48": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=48&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-48.png",
+          "image_72": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-72.png",
+          "image_192": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=192&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-192.png",
+          "image_512": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=512&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-512.png",
+          "first_name": "dhanya",
+          "last_name": "",
+          "team": "T0AG4RT5B9V",
+          "email": "dhanya@sgnl.ai",
+          "title": "",
+          "phone": "",
+          "skype": "",
+          "status_text": "",
+          "status_text_canonical": "",
+          "status_emoji": "",
+          "status_emoji_display_info": [],
+          "status_expiration": 0
+        }
+      }
+    }
+  },
+  "dm-multiline-send": {
+    "status": 200,
+    "ok": true,
+    "statusText": "OK",
+    "body": {
+      "ok": true,
+      "channel": "D0AGPTT2BNY",
+      "ts": "1771896650.372709",
+      "message": {
+        "user": "U0AGZ7APZ17",
+        "type": "message",
+        "ts": "1771896650.372709",
+        "bot_id": "B0AG4S10CQP",
+        "app_id": "A0AHEJ4QT40",
+        "text": "Line 1\nLine 2\nLine 3",
+        "team": "T0AG4RT5B9V",
+        "bot_profile": {
+          "id": "B0AG4S10CQP",
+          "app_id": "A0AHEJ4QT40",
+          "user_id": "U0AGZ7APZ17",
+          "name": "dhanya-test-re-runnable",
+          "icons": {
+            "image_36": "https://a.slack-edge.com/80588/img/plugins/app/bot_36.png",
+            "image_48": "https://a.slack-edge.com/80588/img/plugins/app/bot_48.png",
+            "image_72": "https://a.slack-edge.com/80588/img/plugins/app/service_72.png"
+          },
+          "deleted": false,
+          "updated": 1771862092,
+          "team_id": "T0AG4RT5B9V"
+        },
+        "blocks": [
+          {
+            "type": "rich_text",
+            "block_id": "SFk+a",
+            "elements": [
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "Line 1\nLine 2\nLine 3"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "warning": "missing_charset",
+      "response_metadata": {
+        "warnings": [
+          "missing_charset"
+        ]
+      }
+    }
+  },
+  "dm-special-chars-lookup": {
+    "status": 200,
+    "ok": true,
+    "statusText": "OK",
+    "body": {
+      "ok": true,
+      "user": {
+        "id": "U0AHEHSJ59N",
+        "name": "dhanya",
+        "is_bot": false,
+        "updated": 1771861745,
+        "is_app_user": false,
+        "team_id": "T0AG4RT5B9V",
+        "deleted": false,
+        "color": "50a0cf",
+        "is_email_confirmed": true,
+        "real_name": "dhanya",
+        "tz": "America/Los_Angeles",
+        "tz_label": "Pacific Standard Time",
+        "tz_offset": -28800,
+        "is_admin": true,
+        "is_owner": true,
+        "is_primary_owner": true,
+        "is_restricted": false,
+        "is_ultra_restricted": false,
+        "who_can_share_contact_card": "EVERYONE",
+        "profile": {
+          "real_name": "dhanya",
+          "display_name": "",
+          "avatar_hash": "g1bedc954551",
+          "real_name_normalized": "dhanya",
+          "display_name_normalized": "",
+          "image_24": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=24&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-24.png",
+          "image_32": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=32&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-32.png",
+          "image_48": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=48&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-48.png",
+          "image_72": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-72.png",
+          "image_192": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=192&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-192.png",
+          "image_512": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=512&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-512.png",
+          "first_name": "dhanya",
+          "last_name": "",
+          "team": "T0AG4RT5B9V",
+          "email": "dhanya@sgnl.ai",
+          "title": "",
+          "phone": "",
+          "skype": "",
+          "status_text": "",
+          "status_text_canonical": "",
+          "status_emoji": "",
+          "status_emoji_display_info": [],
+          "status_expiration": 0
+        }
+      }
+    }
+  },
+  "dm-special-chars-send": {
+    "status": 200,
+    "ok": true,
+    "statusText": "OK",
+    "body": {
+      "ok": true,
+      "channel": "D0AGPTT2BNY",
+      "ts": "1771896650.753159",
+      "message": {
+        "user": "U0AGZ7APZ17",
+        "type": "message",
+        "ts": "1771896650.753159",
+        "bot_id": "B0AG4S10CQP",
+        "app_id": "A0AHEJ4QT40",
+        "text": "Hello! <@U12345> &amp; \"quoted\" text with 'apostrophes'",
+        "team": "T0AG4RT5B9V",
+        "bot_profile": {
+          "id": "B0AG4S10CQP",
+          "app_id": "A0AHEJ4QT40",
+          "user_id": "U0AGZ7APZ17",
+          "name": "dhanya-test-re-runnable",
+          "icons": {
+            "image_36": "https://a.slack-edge.com/80588/img/plugins/app/bot_36.png",
+            "image_48": "https://a.slack-edge.com/80588/img/plugins/app/bot_48.png",
+            "image_72": "https://a.slack-edge.com/80588/img/plugins/app/service_72.png"
+          },
+          "deleted": false,
+          "updated": 1771862092,
+          "team_id": "T0AG4RT5B9V"
+        },
+        "blocks": [
+          {
+            "type": "rich_text",
+            "block_id": "H+2",
+            "elements": [
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "Hello! "
+                  },
+                  {
+                    "type": "user",
+                    "user_id": "U12345"
+                  },
+                  {
+                    "type": "text",
+                    "text": " & \"quoted\" text with 'apostrophes'"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "warning": "missing_charset",
+      "response_metadata": {
+        "warnings": [
+          "missing_charset"
+        ]
+      }
+    }
+  },
+  "dm-userid-check-lookup": {
+    "status": 200,
+    "ok": true,
+    "statusText": "OK",
+    "body": {
+      "ok": true,
+      "user": {
+        "id": "U0AHEHSJ59N",
+        "name": "dhanya",
+        "is_bot": false,
+        "updated": 1771861745,
+        "is_app_user": false,
+        "team_id": "T0AG4RT5B9V",
+        "deleted": false,
+        "color": "50a0cf",
+        "is_email_confirmed": true,
+        "real_name": "dhanya",
+        "tz": "America/Los_Angeles",
+        "tz_label": "Pacific Standard Time",
+        "tz_offset": -28800,
+        "is_admin": true,
+        "is_owner": true,
+        "is_primary_owner": true,
+        "is_restricted": false,
+        "is_ultra_restricted": false,
+        "who_can_share_contact_card": "EVERYONE",
+        "profile": {
+          "real_name": "dhanya",
+          "display_name": "",
+          "avatar_hash": "g1bedc954551",
+          "real_name_normalized": "dhanya",
+          "display_name_normalized": "",
+          "image_24": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=24&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-24.png",
+          "image_32": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=32&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-32.png",
+          "image_48": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=48&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-48.png",
+          "image_72": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-72.png",
+          "image_192": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=192&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-192.png",
+          "image_512": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=512&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-512.png",
+          "first_name": "dhanya",
+          "last_name": "",
+          "team": "T0AG4RT5B9V",
+          "email": "dhanya@sgnl.ai",
+          "title": "",
+          "phone": "",
+          "skype": "",
+          "status_text": "",
+          "status_text_canonical": "",
+          "status_emoji": "",
+          "status_emoji_display_info": [],
+          "status_expiration": 0
+        }
+      }
+    }
+  },
+  "dm-userid-check-send": {
+    "status": 200,
+    "ok": true,
+    "statusText": "OK",
+    "body": {
+      "ok": true,
+      "channel": "D0AGPTT2BNY",
+      "ts": "1771896651.126889",
+      "message": {
+        "user": "U0AGZ7APZ17",
+        "type": "message",
+        "ts": "1771896651.126889",
+        "bot_id": "B0AG4S10CQP",
+        "app_id": "A0AHEJ4QT40",
+        "text": "Checking userId in response",
+        "team": "T0AG4RT5B9V",
+        "bot_profile": {
+          "id": "B0AG4S10CQP",
+          "app_id": "A0AHEJ4QT40",
+          "user_id": "U0AGZ7APZ17",
+          "name": "dhanya-test-re-runnable",
+          "icons": {
+            "image_36": "https://a.slack-edge.com/80588/img/plugins/app/bot_36.png",
+            "image_48": "https://a.slack-edge.com/80588/img/plugins/app/bot_48.png",
+            "image_72": "https://a.slack-edge.com/80588/img/plugins/app/service_72.png"
+          },
+          "deleted": false,
+          "updated": 1771862092,
+          "team_id": "T0AG4RT5B9V"
+        },
+        "blocks": [
+          {
+            "type": "rich_text",
+            "block_id": "CjPV",
+            "elements": [
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "Checking userId in response"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "warning": "missing_charset",
+      "response_metadata": {
+        "warnings": [
+          "missing_charset"
+        ]
+      }
+    }
+  },
+  "dm-timestamp-lookup": {
+    "status": 200,
+    "ok": true,
+    "statusText": "OK",
+    "body": {
+      "ok": true,
+      "user": {
+        "id": "U0AHEHSJ59N",
+        "name": "dhanya",
+        "is_bot": false,
+        "updated": 1771861745,
+        "is_app_user": false,
+        "team_id": "T0AG4RT5B9V",
+        "deleted": false,
+        "color": "50a0cf",
+        "is_email_confirmed": true,
+        "real_name": "dhanya",
+        "tz": "America/Los_Angeles",
+        "tz_label": "Pacific Standard Time",
+        "tz_offset": -28800,
+        "is_admin": true,
+        "is_owner": true,
+        "is_primary_owner": true,
+        "is_restricted": false,
+        "is_ultra_restricted": false,
+        "who_can_share_contact_card": "EVERYONE",
+        "profile": {
+          "real_name": "dhanya",
+          "display_name": "",
+          "avatar_hash": "g1bedc954551",
+          "real_name_normalized": "dhanya",
+          "display_name_normalized": "",
+          "image_24": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=24&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-24.png",
+          "image_32": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=32&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-32.png",
+          "image_48": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=48&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-48.png",
+          "image_72": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=72&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-72.png",
+          "image_192": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=192&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-192.png",
+          "image_512": "https://secure.gravatar.com/avatar/1bedc95455119e54ae8ef413c3923d8e.jpg?s=512&d=https%3A%2F%2Fa.slack-edge.com%2Fdf10d%2Fimg%2Favatars%2Fava_0000-512.png",
+          "first_name": "dhanya",
+          "last_name": "",
+          "team": "T0AG4RT5B9V",
+          "email": "dhanya@sgnl.ai",
+          "title": "",
+          "phone": "",
+          "skype": "",
+          "status_text": "",
+          "status_text_canonical": "",
+          "status_emoji": "",
+          "status_emoji_display_info": [],
+          "status_expiration": 0
+        }
+      }
+    }
+  },
+  "dm-timestamp-send": {
+    "status": 200,
+    "ok": true,
+    "statusText": "OK",
+    "body": {
+      "ok": true,
+      "channel": "D0AGPTT2BNY",
+      "ts": "1771896651.502819",
+      "message": {
+        "user": "U0AGZ7APZ17",
+        "type": "message",
+        "ts": "1771896651.502819",
+        "bot_id": "B0AG4S10CQP",
+        "app_id": "A0AHEJ4QT40",
+        "text": "Checking timestamp in response",
+        "team": "T0AG4RT5B9V",
+        "bot_profile": {
+          "id": "B0AG4S10CQP",
+          "app_id": "A0AHEJ4QT40",
+          "user_id": "U0AGZ7APZ17",
+          "name": "dhanya-test-re-runnable",
+          "icons": {
+            "image_36": "https://a.slack-edge.com/80588/img/plugins/app/bot_36.png",
+            "image_48": "https://a.slack-edge.com/80588/img/plugins/app/bot_48.png",
+            "image_72": "https://a.slack-edge.com/80588/img/plugins/app/service_72.png"
+          },
+          "deleted": false,
+          "updated": 1771862092,
+          "team_id": "T0AG4RT5B9V"
+        },
+        "blocks": [
+          {
+            "type": "rich_text",
+            "block_id": "wgn",
+            "elements": [
+              {
+                "type": "rich_text_section",
+                "elements": [
+                  {
+                    "type": "text",
+                    "text": "Checking timestamp in response"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "warning": "missing_charset",
+      "response_metadata": {
+        "warnings": [
+          "missing_charset"
+        ]
+      }
+    }
+  }
+}

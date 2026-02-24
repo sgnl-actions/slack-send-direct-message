@@ -358,4 +358,211 @@ describe('Slack Send Direct Message Script', () => {
       expect(result.reason).toBe('system_shutdown');
     });
   });
+
+  describe('input validation', () => {
+    test('should throw error when userEmail is missing', async () => {
+      await expect(script.invoke({ text: 'Hello!' }, mockContext))
+        .rejects.toThrow('userEmail parameter is required and cannot be empty');
+      expect(mockFetch).not.toHaveBeenCalled();
+    });
+
+    test('should throw error when userEmail is empty string', async () => {
+      await expect(script.invoke({ userEmail: '', text: 'Hello!' }, mockContext))
+        .rejects.toThrow('userEmail parameter is required and cannot be empty');
+      expect(mockFetch).not.toHaveBeenCalled();
+    });
+
+    test('should throw error when text is missing', async () => {
+      await expect(script.invoke({ userEmail: 'test@example.com' }, mockContext))
+        .rejects.toThrow('text parameter is required and cannot be empty');
+      expect(mockFetch).not.toHaveBeenCalled();
+    });
+
+    test('should throw error when text is empty string', async () => {
+      await expect(script.invoke({ userEmail: 'test@example.com', text: '' }, mockContext))
+        .rejects.toThrow('text parameter is required and cannot be empty');
+      expect(mockFetch).not.toHaveBeenCalled();
+    });
+
+    test('should throw error when both userEmail and text are missing', async () => {
+      await expect(script.invoke({}, mockContext))
+        .rejects.toThrow('userEmail parameter is required and cannot be empty');
+      expect(mockFetch).not.toHaveBeenCalled();
+    });
+  });
+
+
+  describe('delay / parseDuration', () => {
+    const successLookup = () => Promise.resolve({
+      ok: true,
+      json: () => Promise.resolve({ ok: true, user: { id: 'U12345678' } })
+    });
+    const successSend = () => Promise.resolve({
+      ok: true,
+      json: () => Promise.resolve({ ok: true, ts: '1609459200.000200' })
+    });
+
+    test('should use default 100ms delay when delay param is not provided', async () => {
+      mockFetch.mockImplementationOnce(successLookup).mockImplementationOnce(successSend);
+      const setTimeoutSpy = jest.spyOn(global, 'setTimeout').mockImplementation((fn) => fn());
+
+      await script.invoke({ userEmail: 'test@example.com', text: 'Hi' }, mockContext);
+
+      expect(setTimeoutSpy).toHaveBeenCalledWith(expect.any(Function), 100);
+    });
+
+    test('should parse delay in milliseconds', async () => {
+      mockFetch.mockImplementationOnce(successLookup).mockImplementationOnce(successSend);
+      const setTimeoutSpy = jest.spyOn(global, 'setTimeout').mockImplementation((fn) => fn());
+
+      await script.invoke({ userEmail: 'test@example.com', text: 'Hi', delay: '250ms' }, mockContext);
+
+      expect(setTimeoutSpy).toHaveBeenCalledWith(expect.any(Function), 250);
+    });
+
+    test('should parse delay in seconds', async () => {
+      mockFetch.mockImplementationOnce(successLookup).mockImplementationOnce(successSend);
+      const setTimeoutSpy = jest.spyOn(global, 'setTimeout').mockImplementation((fn) => fn());
+
+      await script.invoke({ userEmail: 'test@example.com', text: 'Hi', delay: '2s' }, mockContext);
+
+      expect(setTimeoutSpy).toHaveBeenCalledWith(expect.any(Function), 2000);
+    });
+
+    test('should parse delay in minutes', async () => {
+      mockFetch.mockImplementationOnce(successLookup).mockImplementationOnce(successSend);
+      const setTimeoutSpy = jest.spyOn(global, 'setTimeout').mockImplementation((fn) => fn());
+
+      await script.invoke({ userEmail: 'test@example.com', text: 'Hi', delay: '1m' }, mockContext);
+
+      expect(setTimeoutSpy).toHaveBeenCalledWith(expect.any(Function), 60000);
+    });
+
+    test('should parse delay in hours', async () => {
+      mockFetch.mockImplementationOnce(successLookup).mockImplementationOnce(successSend);
+      const setTimeoutSpy = jest.spyOn(global, 'setTimeout').mockImplementation((fn) => fn());
+
+      await script.invoke({ userEmail: 'test@example.com', text: 'Hi', delay: '1h' }, mockContext);
+
+      expect(setTimeoutSpy).toHaveBeenCalledWith(expect.any(Function), 3600000);
+    });
+
+    test('should fall back to 100ms for invalid delay format', async () => {
+      mockFetch.mockImplementationOnce(successLookup).mockImplementationOnce(successSend);
+      const setTimeoutSpy = jest.spyOn(global, 'setTimeout').mockImplementation((fn) => fn());
+
+      await script.invoke({ userEmail: 'test@example.com', text: 'Hi', delay: 'invalid' }, mockContext);
+
+      expect(setTimeoutSpy).toHaveBeenCalledWith(expect.any(Function), 100);
+    });
+  });
+
+  describe('network failures', () => {
+    test('should throw when fetch rejects during user lookup', async () => {
+      mockFetch.mockRejectedValueOnce(new Error('Network timeout'));
+
+      await expect(script.invoke({
+        userEmail: 'test@example.com',
+        text: 'Hello!'
+      }, mockContext)).rejects.toThrow('Network timeout');
+
+      expect(mockFetch).toHaveBeenCalledTimes(1);
+    });
+
+    test('should throw when fetch rejects during message send', async () => {
+      mockFetch
+        .mockImplementationOnce(() => Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve({ ok: true, user: { id: 'U12345678' } })
+        }))
+        .mockRejectedValueOnce(new Error('Connection refused'));
+
+      await expect(script.invoke({
+        userEmail: 'test@example.com',
+        text: 'Hello!'
+      }, mockContext)).rejects.toThrow('Connection refused');
+
+      expect(mockFetch).toHaveBeenCalledTimes(2);
+    });
+  });
+
+  describe('edge cases in response handling', () => {
+    test('should throw when user lookup returns ok:true but no user ID', async () => {
+      mockFetch.mockImplementationOnce(() => Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve({ ok: true, user: {} }) // user exists but no id
+      }));
+
+      await expect(script.invoke({
+        userEmail: 'test@example.com',
+        text: 'Hello!'
+      }, mockContext)).rejects.toThrow(/No user ID found/);
+    });
+
+    test('should throw when user lookup returns ok:true but user is null', async () => {
+      mockFetch.mockImplementationOnce(() => Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve({ ok: true, user: null })
+      }));
+
+      await expect(script.invoke({
+        userEmail: 'test@example.com',
+        text: 'Hello!'
+      }, mockContext)).rejects.toThrow(/No user ID found/);
+    });
+
+    test('should handle non-404 HTTP error from user lookup', async () => {
+      mockFetch.mockImplementationOnce(() => Promise.resolve({
+        ok: false,
+        status: 500,
+        statusText: 'Internal Server Error',
+        json: () => Promise.resolve({})
+      }));
+
+      await expect(script.invoke({
+        userEmail: 'test@example.com',
+        text: 'Hello!'
+      }, mockContext)).rejects.toThrow('Failed to lookup user test@example.com: 500 Internal Server Error');
+    });
+
+    test('should handle Slack API error in message send with unknown error', async () => {
+      mockFetch
+        .mockImplementationOnce(() => Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve({ ok: true, user: { id: 'U12345678' } })
+        }))
+        .mockImplementationOnce(() => Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve({ ok: false }) // no error field
+        }));
+
+      await expect(script.invoke({
+        userEmail: 'test@example.com',
+        text: 'Hello!'
+      }, mockContext)).rejects.toThrow('Slack API error during message send: Unknown error');
+    });
+
+    test('should use custom address from params over environment ADDRESS', async () => {
+      mockFetch
+        .mockImplementationOnce(() => Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve({ ok: true, user: { id: 'U12345678' } })
+        }))
+        .mockImplementationOnce(() => Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve({ ok: true, ts: '1609459200.000200' })
+        }));
+
+      await script.invoke({
+        userEmail: 'test@example.com',
+        text: 'Hello!',
+        address: 'https://custom-slack-proxy.example.com'
+      }, mockContext);
+
+      expect(mockFetch).toHaveBeenNthCalledWith(1,
+        expect.stringContaining('https://custom-slack-proxy.example.com'),
+        expect.any(Object)
+      );
+    });
+  });
 });

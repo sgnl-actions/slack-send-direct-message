@@ -1,3 +1,5 @@
+# Local environment variables (never commit secrets)
+.env
 # Dependencies
 node_modules/
 npm-debug.log*
