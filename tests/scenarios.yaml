@@ -1,0 +1,98 @@
+# Slack Send Direct Message Test Scenarios
+action:
+  params:
+    userEmail: user@example.com
+    text: Test message
+  context:
+    secrets:
+      BEARER_AUTH_TOKEN: xoxb-test-token
+    environment:
+      ADDRESS: https://slack.com
+
+scenarios:
+
+  # ── success ───────────────────────────────────────────────────────────────
+
+  - name: successfully send direct message
+    steps:
+      - request:
+          method: GET
+          url: https://slack.com/api/users.lookupByEmail?email=user%40example.com
+        fixture: fixtures/200-user-lookup.http
+      - request:
+          method: POST
+          url: https://slack.com/api/chat.postMessage
+        fixture: fixtures/200-message-sent.http
+    invoke:
+      returns:
+        status: success
+        userEmail: user@example.com
+        userId: U123456
+        text: Test message
+        ts: "1772135265.080979"
+        ok: true
+
+  - name: idempotent - second send also succeeds
+    steps:
+      - request:
+          method: GET
+          url: https://slack.com/api/users.lookupByEmail?email=user%40example.com
+        fixture: fixtures/200-user-lookup.http
+      - request:
+          method: POST
+          url: https://slack.com/api/chat.postMessage
+        fixture: fixtures/200-message-sent.http
+    invoke:
+      returns:
+        status: success
+        userEmail: user@example.com
+        userId: U123456
+        ok: true
+
+  # ── lookup failures ───────────────────────────────────────────────────────
+
+  - name: user not found
+    steps:
+      - request:
+          method: GET
+          url: https://slack.com/api/users.lookupByEmail?email=user%40example.com
+        fixture: fixtures/200-users-not-found.http
+    invoke:
+      throws: "Slack API error during user lookup: users_not_found"
+
+  - name: channel not found on message send
+    steps:
+      - request:
+          method: GET
+          url: https://slack.com/api/users.lookupByEmail?email=user%40example.com
+        fixture: fixtures/200-user-lookup.http
+      - request:
+          method: POST
+          url: https://slack.com/api/chat.postMessage
+        fixture: fixtures/200-channel-not-found.http
+    invoke:
+      throws: "Slack API error during message send: channel_not_found"
+
+  # ── input validation ──────────────────────────────────────────────────────
+
+  - name: missing userEmail
+    params:
+      userEmail: ~
+    steps: []
+    invoke:
+      throws: "userEmail parameter is required and cannot be empty"
+
+  - name: missing text
+    params:
+      text: ~
+    steps: []
+    invoke:
+      throws: "text parameter is required and cannot be empty"
+
+  - name: missing auth token
+    context:
+      secrets:
+        BEARER_AUTH_TOKEN: ~
+    steps: []
+    invoke:
+      throws: "No authentication configured"

@@ -221,7 +221,7 @@ npm test
 npm run test:coverage
 
 # Run locally with sample data
-npm run dev -- --params '{"userEmail":"test@example.com","text":"Test message"}'
+npm run dev -- --params '{"userEmail":"test@example.com","text":"Test message"}' --secrets='{"BEARER_AUTH_TOKEN":"xoxb-..."}'
 
 # Lint code
 npm run lint

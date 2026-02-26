@@ -1,0 +1,18 @@
+HTTP/2 200
+date: Thu, 26 Feb 2026 19:47:45 GMT
+server: Apache
+vary: Accept-Encoding
+x-slack-req-id: 5cf4e80157b34fc22a3f8e3d0e4d9bb5
+x-content-type-options: nosniff
+pragma: no-cache
+cache-control: private, no-cache, no-store, must-revalidate
+expires: Sat, 26 Jul 1997 05:00:00 GMT
+content-type: application/json; charset=utf-8
+x-accepted-oauth-scopes: chat:write
+x-oauth-scopes: chat:write,incoming-webhook,users:read.email,users:read
+access-control-expose-headers: x-slack-req-id, retry-after
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+referrer-policy: no-referrer
+access-control-allow-origin: *
+
+{"ok":true,"channel":"D0TESTCHAN","ts":"1772135265.080979","message":{"user":"U0TESTBOT","type":"message","ts":"1772135265.080979","bot_id":"B0TESTBOT","app_id":"A0TESTAPP","text":"Test message","team":"T0TESTTEAM","bot_profile":{"id":"B0TESTBOT","app_id":"A0TESTAPP","user_id":"U0TESTBOT","name":"test-bot","deleted":false,"updated":1771862092,"team_id":"T0TESTTEAM"},"blocks":[{"type":"rich_text","block_id":"LeJ5","elements":[{"type":"rich_text_section","elements":[{"type":"text","text":"Test message"}]}]}]},"warning":"missing_charset","response_metadata":{"warnings":["missing_charset"]}}
