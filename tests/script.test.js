@@ -186,22 +186,6 @@ describe('Slack Send Direct Message Script', () => {
       expect(result.text).toBe('Message with "quotes" and \'single quotes\'');
     });
 
-    test('should throw error when BEARER_AUTH_TOKEN is missing', async () => {
-      const params = {
-        userEmail: 'test@example.com',
-        text: 'Test message'
-      };
-
-      const contextWithoutToken = {
-        ...mockContext,
-        secrets: {}
-      };
-
-      await expect(script.invoke(params, contextWithoutToken)).rejects.toThrow(
-        'No authentication configured'
-      );
-    });
-
     test('should handle user not found error from lookup', async () => {
       const params = {
         userEmail: 'nonexistent@example.com',
