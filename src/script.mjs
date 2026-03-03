@@ -96,7 +96,7 @@ export default {
   invoke: async (params, context) => {
     console.log('Starting Slack direct message send');
 
-    const { userEmail, text, delay } = params;
+    const { userEmail, text, delay, address } = params;
 
     if (!userEmail || typeof userEmail !== 'string' || !userEmail.trim()) {
       throw new Error('userEmail parameter is required and cannot be empty');
@@ -106,7 +106,7 @@ export default {
       throw new Error('text parameter is required and cannot be empty');
     }
 
-    console.log(`Sending message to: ${userEmail}`);
+    console.log('Starting user lookup to send direcdt message');
 
     const baseUrl = getBaseURL(params, context);
     const headers = await createAuthHeaders(context);
@@ -115,15 +115,15 @@ export default {
     const delayMs = parseDuration(delay);
 
     // Step 1: Look up user by email
-    console.log(`Looking up user by email: ${userEmail}`);
+    console.log('Looking up user by email');
     const lookupResponse = await lookupUserByEmail(userEmail, baseUrl, headers);
 
     if (!lookupResponse.ok) {
       const errorData = await lookupResponse.json().catch(() => ({}));
       if (lookupResponse.status === 404 || errorData.error === 'users_not_found') {
-        throw new Error(`User not found with email: ${userEmail}`);
+        throw new Error('User not found');
       }
-      throw new Error(`Failed to lookup user ${userEmail}: ${lookupResponse.status} ${lookupResponse.statusText}`);
+      throw new Error(`Failed to lookup user: ${lookupResponse.status} ${lookupResponse.statusText}`);
     }
 
     const lookupData = await lookupResponse.json();
@@ -133,7 +133,7 @@ export default {
 
     const userId = lookupData.user?.id;
     if (!userId) {
-      throw new Error(`No user ID found in response for email: ${userEmail}`);
+      throw new Error('No user ID found in response');
     }
 
     console.log(`Found user ID: ${userId}`);
@@ -155,7 +155,7 @@ export default {
       throw new Error(`Slack API error during message send: ${messageData.error || 'Unknown error'}`);
     }
 
-    console.log(`Successfully sent direct message to ${userEmail}`);
+    console.log(`Successfully sent direct message to user: ${userId}`);
 
     // Return structured results
     return {
@@ -181,7 +181,7 @@ export default {
    */
   halt: async (params, _context) => {
     const { reason, userEmail } = params;
-    console.log(`Slack message job halted (${reason}) for user: ${userEmail || 'unknown'}`);
+    console.log(`Slack message job halted (${reason})`);
 
     // No specific cleanup needed for this action
     return {
