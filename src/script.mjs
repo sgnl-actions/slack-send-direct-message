@@ -5,7 +5,7 @@
  * and then sending a message to their DM channel.
  */
 
-import { getBaseURL, createAuthHeaders } from '@sgnl-actions/utils';
+import { getBaseURL, createHeaders } from '@sgnl-actions/utils';
 
 function parseDuration(durationStr) {
   if (!durationStr) return 100; // default 100ms
@@ -109,7 +109,12 @@ export default {
     console.log('Starting user lookup and message send');
 
     const baseUrl = getBaseURL(params, context);
-    const headers = await createAuthHeaders(context);
+    const headers = await createHeaders(context);
+
+    // Validate authentication is configured
+    if (!headers.Authorization) {
+      throw new Error('No authentication configured. Slack API requires bearer token or OAuth2 access token');
+    }
 
     // Parse delay duration
     const delayMs = parseDuration(delay);
