@@ -96,7 +96,7 @@ export default {
   invoke: async (params, context) => {
     console.log('Starting Slack direct message send');
 
-    const { userEmail, text, delay, address } = params;
+    const { userEmail, text, delay } = params;
 
     if (!userEmail || typeof userEmail !== 'string' || !userEmail.trim()) {
       throw new Error('userEmail parameter is required and cannot be empty');
@@ -106,7 +106,7 @@ export default {
       throw new Error('text parameter is required and cannot be empty');
     }
 
-    console.log('Starting user lookup to send direcdt message');
+    console.log('Starting user lookup and message send');
 
     const baseUrl = getBaseURL(params, context);
     const headers = await createAuthHeaders(context);
