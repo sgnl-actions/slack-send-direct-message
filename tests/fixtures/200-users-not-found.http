@@ -1,0 +1,19 @@
+HTTP/2 200
+date: Thu, 26 Feb 2026 19:16:39 GMT
+server: Apache
+vary: Accept-Encoding
+x-slack-req-id: af464ede3961e4a8a77180652c2436f4
+x-content-type-options: nosniff
+pragma: no-cache
+cache-control: private, no-cache, no-store, must-revalidate
+expires: Sat, 26 Jul 1997 05:00:00 GMT
+content-type: application/json; charset=utf-8
+x-slack-failure: users_not_found
+x-accepted-oauth-scopes: users:read.email
+x-oauth-scopes: chat:write,incoming-webhook,users:read.email,users:read
+access-control-expose-headers: x-slack-req-id, retry-after
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+referrer-policy: no-referrer
+access-control-allow-origin: *
+
+{"ok":false,"error":"users_not_found"}
